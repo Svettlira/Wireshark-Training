@@ -1,0 +1,42 @@
+# Wireshark FTP Control Channel Filters Cheat Sheet
+
+## FTP Request Command (client → server)
+Show specific commands sent by the client:
+```wireshark
+ftp.request.command == "USER"
+ftp.request.command == "PASS"
+ftp.request.command == "LIST"
+ftp.request.command == "STOR"   # upload a file
+ftp.request.command == "RETR"   # download a file
+```
+
+## FTP Request Argument (arguments to the command)
+Examples of arguments passed with commands:
+```wireshark
+ftp.request.command == "USER" && ftp.request.arg == "admin"
+ftp.request.command == "RETR" && ftp.request.arg == "report.pdf"
+ftp.request.command == "STOR"
+```
+
+## FTP Response Code (server replies)
+Numeric server reply codes:
+```wireshark
+ftp.response.code == 230   # Successful login
+ftp.response.code == 530   # Failed login
+ftp.response.code == 150   # Starting a data transfer
+ftp.response.code == 226   # Transfer complete
+```
+
+## FTP Response Argument (server reply message)
+Examples of server text messages:
+```wireshark
+ftp.response.arg contains "successful"
+ftp.response.arg contains "denied"
+```
+
+## Suggested Workflow for Investigation
+1. Filter for all USER commands to see attempted usernames.  
+2. Use `ftp.response.code == 530` to identify failed logins.  
+3. Check `ftp.response.code == 230` for successful logins.  
+4. Filter for `RETR` or `STOR` to identify file transfers.  
+5. Switch to `ftp-data` filter to view the actual file contents.  
