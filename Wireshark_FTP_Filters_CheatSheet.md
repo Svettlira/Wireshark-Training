@@ -3,38 +3,46 @@
 ## FTP Request Command (client → server)
 Show specific commands sent by the client:
 
+### USER command (login username)
 ```wireshark
 ftp.request.command == "USER"
 ```
 
+### PASS command (login password)
 ```wireshark
 ftp.request.command == "PASS"
 ```
 
+### LIST command (list directory contents)
 ```wireshark
 ftp.request.command == "LIST"
 ```
- ### upload a file
+
+### STOR command (upload a file)
 ```wireshark
-ftp.request.command == "STOR"  
+ftp.request.command == "STOR"
 ```
-### download a file
+
+### RETR command (download a file)
 ```wireshark
-ftp.request.command == "RETR"   
+ftp.request.command == "RETR"
 ```
 
 ---
 
 ## FTP Request Argument (arguments to the command)
 
+### USER command with specific username (admin)
 ```wireshark
 ftp.request.command == "USER" && ftp.request.arg == "admin"
 ```
 
+### RETR command requesting specific file (report.pdf)
 ```wireshark
 ftp.request.command == "RETR" && ftp.request.arg == "report.pdf"
 ```
 
+### Any STOR command (upload attempt)
 ```wireshark
 ftp.request.command == "STOR"
 ```
@@ -43,30 +51,36 @@ ftp.request.command == "STOR"
 
 ## FTP Response Code (server replies)
 
+### 230 response code (login successful)
 ```wireshark
-ftp.response.code == 230   # Successful login
+ftp.response.code == 230
 ```
 
+### 530 response code (login failed)
 ```wireshark
-ftp.response.code == 530   # Failed login
+ftp.response.code == 530
 ```
 
+### 150 response code (starting a data transfer)
 ```wireshark
-ftp.response.code == 150   # Starting a data transfer
+ftp.response.code == 150
 ```
 
+### 226 response code (transfer complete)
 ```wireshark
-ftp.response.code == 226   # Transfer complete
+ftp.response.code == 226
 ```
 
 ---
 
 ## FTP Response Argument (server reply message)
 
+### Response message containing "successful"
 ```wireshark
 ftp.response.arg contains "successful"
 ```
 
+### Response message containing "denied"
 ```wireshark
 ftp.response.arg contains "denied"
 ```
