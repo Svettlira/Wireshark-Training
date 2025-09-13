@@ -14,13 +14,13 @@ ftp.request.command == "PASS"
 ```wireshark
 ftp.request.command == "LIST"
 ```
-
+ # upload a file
 ```wireshark
-ftp.request.command == "STOR"   # upload a file
+ftp.request.command == "STOR"  
 ```
-
+# download a file
 ```wireshark
-ftp.request.command == "RETR"   # download a file
+ftp.request.command == "RETR"   
 ```
 
 ---
