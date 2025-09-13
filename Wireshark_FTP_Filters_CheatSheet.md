@@ -95,6 +95,40 @@ ftp.response.arg contains "denied"
 
 ---
 
+# OSI Model vs. Wireshark Layers
+
+This diagram maps what you see in Wireshark to the OSI model layers.
+
+```
++------------------------+---------------------------+
+| OSI Layer              | Wireshark Example        |
++------------------------+---------------------------+
+| Layer 7: Application   | File Transfer Protocol   |
+|                        | (FTP)                    |
++------------------------+---------------------------+
+| Layer 6: Presentation  | (Usually part of App in  |
+|                        | Wireshark – not separate)|
++------------------------+---------------------------+
+| Layer 5: Session       | (Usually part of App in  |
+|                        | Wireshark – not separate)|
++------------------------+---------------------------+
+| Layer 4: Transport     | Transmission Control      |
+|                        | Protocol (TCP)           |
++------------------------+---------------------------+
+| Layer 3: Network       | Internet Protocol (IPv4) |
++------------------------+---------------------------+
+| Layer 2: Data Link     | Ethernet II              |
++------------------------+---------------------------+
+| Layer 1: Physical      | Not shown in Wireshark   |
+|                        | (bits on the wire)       |
++------------------------+---------------------------+
+```
+
+### Notes
+- Wireshark doesn’t directly show Layer 1 (Physical). It only shows frame size, capture length, etc.  
+- Layers 5 and 6 (Session & Presentation) are usually combined into Layer 7 (Application) in Wireshark analysis.  
+- Example packet: Ethernet II → IPv4 → TCP → FTP.  
+
 ## Suggested Workflow for Investigation
 1. Filter for all USER commands to see attempted usernames.  
 2. Use `ftp.response.code == 530` to identify failed logins.  
