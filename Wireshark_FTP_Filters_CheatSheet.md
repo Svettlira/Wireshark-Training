@@ -12,6 +12,10 @@ ftp.request.command == "USER"
 ```wireshark
 ftp.request.command == "PASS"
 ```
+### Reqeust passive FTP session
+```wireshark
+ftp.request.command == "PASV"
+```
 
 ### LIST command (list directory contents)
 ```wireshark
@@ -69,6 +73,10 @@ ftp.response.code == 150
 ### 226 response code (transfer complete)
 ```wireshark
 ftp.response.code == 226
+```
+### 227 response code (Entering Passive Mode)
+```wireshark
+ftp.response.code == 227
 ```
 
 ---
