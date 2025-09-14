@@ -1,7 +1,6 @@
 # Wireshark FTP Control Channel Filters Cheat Sheet
 
-## FTP Request Command (client → server)
-Show specific commands sent by the client:
+## FTP commands sent by the client:
 
 ### USER command (login username)
 ```wireshark
@@ -53,7 +52,7 @@ ftp.request.command == "STOR"
 
 ---
 
-## FTP Response Code (server replies)
+## FTP Server Replies
 
 ### 230 response code (login successful)
 ```wireshark
@@ -78,7 +77,8 @@ ftp.response.code == 226
 ```wireshark
 ftp.response.code == 227
 ```
-
+### The data channel traffic
+ftp-data
 ---
 
 ## FTP Response Argument (server reply message)
