@@ -1,6 +1,6 @@
-# Wireshark FTP Control Channel Filters Cheat Sheet
+# Wireshark FTP Protocol Filters Cheat Sheet
 
-## FTP Client Commands
+## Client Commands
 
 ### USER command (login username)
 ```wireshark
@@ -33,7 +33,7 @@ ftp.request.command == "RETR"
 
 ---
 
-## FTP Server Replies
+## Server Replies
 
 ### 230 response code (login successful)
 ```wireshark
