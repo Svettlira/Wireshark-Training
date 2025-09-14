@@ -1,6 +1,6 @@
 # Wireshark FTP Control Channel Filters Cheat Sheet
 
-## FTP commands sent by the client:
+## FTP Client Commands
 
 ### USER command (login username)
 ```wireshark
