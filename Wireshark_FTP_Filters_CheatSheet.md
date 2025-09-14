@@ -33,25 +33,6 @@ ftp.request.command == "RETR"
 
 ---
 
-## FTP Request Argument (arguments to the command)
-
-### USER command with specific username (admin)
-```wireshark
-ftp.request.command == "USER" && ftp.request.arg == "admin"
-```
-
-### RETR command requesting specific file (report.pdf)
-```wireshark
-ftp.request.command == "RETR" && ftp.request.arg == "report.pdf"
-```
-
-### Any STOR command (upload attempt)
-```wireshark
-ftp.request.command == "STOR"
-```
-
----
-
 ## FTP Server Replies
 
 ### 230 response code (login successful)
@@ -78,7 +59,9 @@ ftp.response.code == 226
 ftp.response.code == 227
 ```
 ### The data channel traffic
+```wireshark
 ftp-data
+```
 ---
 
 ## FTP Response Argument (server reply message)
@@ -92,7 +75,23 @@ ftp.response.arg contains "successful"
 ```wireshark
 ftp.response.arg contains "denied"
 ```
+---
+## FTP Request Argument (arguments to the command)
 
+### USER command with specific username (admin)
+```wireshark
+ftp.request.command == "USER" && ftp.request.arg == "admin"
+```
+
+### RETR command requesting specific file (report.pdf)
+```wireshark
+ftp.request.command == "RETR" && ftp.request.arg == "report.pdf"
+```
+
+### Any STOR command (upload attempt)
+```wireshark
+ftp.request.command == "STOR"
+```
 ---
 
 # OSI Model vs. Wireshark Layers
@@ -128,10 +127,3 @@ This diagram maps what you see in Wireshark to the OSI model layers.
 - Wireshark doesn’t directly show Layer 1 (Physical). It only shows frame size, capture length, etc.  
 - Layers 5 and 6 (Session & Presentation) are usually combined into Layer 7 (Application) in Wireshark analysis.  
 - Example packet: Ethernet II → IPv4 → TCP → FTP.  
-
-## Suggested Workflow for Investigation
-1. Filter for all USER commands to see attempted usernames.  
-2. Use `ftp.response.code == 530` to identify failed logins.  
-3. Check `ftp.response.code == 230` for successful logins.  
-4. Filter for `RETR` or `STOR` to identify file transfers.  
-5. Switch to `ftp-data` filter to view the actual file contents.  
